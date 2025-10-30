@@ -15,7 +15,7 @@ const Header = () => {
                         setLangMenu(true)
                     }}>انتخاب زبان</button>
                     {langMenu ? <section className="  text-black absolute top-10 flex flex-col">
-                        {languges.map((lang) => (<button style={{ backgroundImage: `url(${lang.falg})` }} className={`px-2 my-1 bg-cover bg-center text-black font-semibold transition-all duration-200`} key={lang.id} onClick={() => { setLang(lang.code), setLangMenu(false) }}>{lang.name}</button>))}
+                        {languges.map((lang) => (<button style={{ backgroundImage: `url(${lang.falg})` }} className={`px-2 my-1 bg-cover bg-center text-black font-semibold transition-all duration-200`} key={lang.id} onClick={() => { setLang(lang.code); setLangMenu(false) ;}}>{lang.name}</button>))}
                     </section>
                         : <></>}
 
@@ -25,7 +25,7 @@ const Header = () => {
                     {headerLinks.map((link) => (<Link key={link.id} href={link.href}>{link.title}</Link>))}
                 </section>
             </header>
-            {console.log(lang)}
+           
         </>
     )
 
