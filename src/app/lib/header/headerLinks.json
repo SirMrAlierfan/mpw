@@ -1,23 +1,41 @@
 [
   {
+    "id": 0,
+    "title": {
+      "fa": "انتخاب زبان",
+      "en": "select language"
+    }
+  },
+  {
     "id": 1,
-    "title": "home",
-    "href": "/"
+    "href": "/",
+    "title": {
+      "fa": "خانه",
+      "en": "Home"
+    }
   },
   {
     "id": 2,
-    "title": "about me",
-    "href": "/about"
+    "href": "/about",
+    "title": {
+      "fa": "درباره من",
+      "en": "About Me"
+    }
   },
   {
     "id": 3,
-    "title": "projects",
-    "href": "/projects"
+    "href": "/projects",
+    "title": {
+      "fa": "پروژه‌ها",
+      "en": "Projects"
+    }
   },
   {
     "id": 4,
-    "title": "another world",
-    "href": "/myWorld"
+    "href": "/myWorld",
+    "title": {
+      "fa": "جهان دیگر",
+      "en": "Another World"
+    }
   }
 ]
-
