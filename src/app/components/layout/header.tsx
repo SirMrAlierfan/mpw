@@ -52,7 +52,7 @@ export default function FancyHeader() {
   const flagSrc = (l?: LangItem) => l?.flag ?? l?.falg ?? "";
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-[color:var(--bg-glass)] backdrop-blur-md shadow-md text-black text-nowrap">
+    <header className="container  sticky top-0 z-50 bg-[color:var(--bg-glass)] backdrop-blur-md shadow-md text-black text-nowrap">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-20 py-4 flex items-center justify-between gap-50">
 
         {/* Logo */}
@@ -120,16 +120,12 @@ export default function FancyHeader() {
         <div className="flex items-center gap-4 flex-1 justify-end">
 
           {/* Mobile toggle (same button opens/closes) */}
-          <button onClick={() => setMobileOpen((s) => !s)} className="sm:hidden p-2 rounded-lg border bg-white shadow-sm">
-            {mobileOpen ? (
-              <svg className="w-6 h-6" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
+          <button onClick={() => setMobileOpen((s) => !s)} className="sm:hidden p-2 rounded-lg border bg-white shadow-sm mx-5">
+             
               <svg className="w-6 h-6" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" fill="none">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-            )}
+            
           </button>
         </div>
       </div>
@@ -144,7 +140,7 @@ export default function FancyHeader() {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="fixed inset-0 z-50 bg-white backdrop-blur-xl p-6 shadow-2xl"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between ">
               {/* Real logo */}
               <div className="px-4 py-2 rounded-2xl shadow-sm font-extrabold text-xl tracking-widest bg-white/90 text-[color:var(--text-strong)]">
                 E̳̿͟͞R̳̿͟͞P̳̿͟͞H̳̿͟͞U̳̿͟͞N̳̿͟͞
