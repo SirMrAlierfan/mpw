@@ -1,5 +1,4 @@
 "use client"
-import GiftPopup from "@/com/WelcomePopup";
 
 import { useRef, useState } from "react";
 
