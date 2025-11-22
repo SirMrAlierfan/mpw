@@ -1,49 +1,33 @@
-// Updated FancyHeader component with:
-// 1. Same hamburger button toggles open/close
-// 2. Real logo inside mobile menu
-// 3. Language selector moved inside mobile menu as dropdown
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import headerLinks from "@/app/lib/header/headerLinks.json";
+import { useLang } from "../../lib/context/context";
 
 type LangItem = { id: number; code: string; name: string; flag?: string; falg?: string };
 
-export const COLORS = {
-  primary: "#4F46E5",
-  primaryHover: "#4338CA",
-  accent: "#06B6D4",
-  neutralBg: "rgba(255,255,255,0.9)",
-  glass: "rgba(255,255,255,0.7)",
-  border: "#E6E9EF",
-  mutedText: "#6B7280",
-  strongText: "#111827",
-  success: "#10B981",
-  danger: "#EF4444",
-};
+export default function Header() {
 
-export default function FancyHeader() {
+ 
+  const { lang, setLang, langApiBase } = useLang();
+
   const [languges, setLanguges] = useState<LangItem[]>([]);
-  const [lang, setLang] = useState<string>("fa");
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [langOpen, setLangOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const saved = typeof window !== "undefined" ? localStorage.getItem("lang") : null;
-    if (saved) setLang(saved);
-
-    fetch("https://690861422d902d0651b00a59.mockapi.io/languges")
+    fetch(`${langApiBase}/languges`)
       .then((r) => r.json())
       .then((data) => setLanguges(data))
       .catch(() => {});
-  }, []);
+  }, [langApiBase]);
 
   const changeLang = (code: string) => {
     setLang(code);
     try {
       localStorage.setItem("lang", code);
-    } catch (e) {}
+    } catch {}
   };
 
   const langButton = headerLinks.find((item) => item.id === 0);
@@ -53,7 +37,7 @@ export default function FancyHeader() {
 
   return (
     <header className="container  sticky top-0 z-50 bg-[color:var(--bg-glass)] backdrop-blur-md shadow-md text-black text-nowrap">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-20 py-4 flex items-center justify-between gap-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-20 py-4 flex items-center justify-between gap-20">
 
         {/* Logo */}
         <div className="flex items-center flex-1 ">
@@ -82,7 +66,7 @@ export default function FancyHeader() {
         <div className="hidden sm:flex items-center ml-6 relative ">
           <button
             onClick={() => setLangOpen((s) => !s)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border bg-white hover:shadow-md transition   "
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border bg-white hover:shadow-md transition cursor-pointer   "
           >
             <span className="w-6 h-4 rounded-sm overflow-hidden inline-block ">
               {languges.length ? (
@@ -138,7 +122,7 @@ export default function FancyHeader() {
             animate={{ x: 0 }}
             exit={{ x: "60%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-50 bg-white backdrop-blur-xl p-6 shadow-2xl"
+            className="fixed inset-0 z-50 bg-white backdrop-blur-xl p-6 shadow-2xl "
           >
             <div className="flex items-center justify-between ">
               {/* Real logo */}
@@ -152,7 +136,7 @@ export default function FancyHeader() {
               </button>
             </div>
 
-            <div className="mt-10 grid gap-6 text-white ">
+            <div className="mt-10 grid gap-6 text-white bg-[#0a0a0a]">
               {navbar.map((link) => (
                 <Link
                   key={link.id}

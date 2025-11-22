@@ -6,20 +6,19 @@ type LangCode = string;
 interface LanguageContextType {
   lang: LangCode;
   setLang: (lang: LangCode) => void;
-  apiBase: string;
+  langApiBase: any;
 }
 
-
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
+const MsgType=createContext<msg | undefined>(undefined);
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<LangCode>("fa");
 
-  const apiBase ="https://690861422d902d0651b00a59.mockapi.io/languges"
-    
+  const langApiBase = process.env.NEXT_PUBLIC_LANG_API;
+
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, apiBase }}>
+    <LanguageContext.Provider value={{ lang, setLang, langApiBase }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -32,3 +31,7 @@ export const useLang = (): LanguageContextType => {
   }
   return context;
 };
+interface msg {
+  normalMsg: string;
+  unknownMsg: string;
+}
