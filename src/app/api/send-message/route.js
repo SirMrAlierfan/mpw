@@ -1,7 +1,7 @@
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { type, text, username, targetId } = body;
+    const { type, text, username, targetId , resiver } = body;
 
     // Validation
     if (!text || !targetId) {
@@ -9,7 +9,7 @@ export async function POST(req) {
     }
 
     const BOT_TOKEN = process.env.BOT_TOKEN;
-    const CHAT_ID = process.env.TARGET_GROUP;
+    const CHAT_ID = resiver
 
     if (!BOT_TOKEN || !CHAT_ID) {
       return Response.json(
@@ -35,6 +35,22 @@ ${text}
       body: JSON.stringify({
         chat_id: CHAT_ID,
         text: finalMessage,
+         reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "رفتن به پروفایل مخاطب",
+                url: `https://t.me/${targetId.replace("@", "")}`
+              }
+            ],
+            [
+              {
+                text: "باز کردن سایت",
+                url: "https://Erphun.ir"
+              }
+            ]
+          ]
+        }
       }),
     });
 
