@@ -39,18 +39,21 @@ const MessageBot = () => {
         if (!targetId.trim()) return alert("ایدی مخاطب پیام را وارد کنید!");
         if (!isValidTelegramUsername(targetId)) return alert("ایدی مخاطب باید یک یوزرنیم معتبر تلگرام باشد (شروع با @ و شامل حروف انگلیسی، اعداد یا _)");
         if (containsForbiddenWords(text)) return alert("پیام شامل کلمات ممنوعه است!");
-        if (reciverType === "person" && !isValidTelegramUsername(targetId)) {
-            return alert("ایدی شخص باید یک یوزرنیم معتبر باشد");
+        if (reciverType === "person") {
+            if (!isValidTelegramUsername(targetId)) {
+                return alert("ایدی شخص باید یک یوزرنیم معتبر باشد (مثال: @username)");
+            }
+        } else if (reciverType === "group") {
+            if (!isValidTelegramChat(chatUserName)) {
+                return alert("ایدی گروه معتبر نیست (باید @groupname یا -100xxxxxxxxxxx باشد)");
+            }
         }
 
-        if (reciverType === "group" && !isValidTelegramChat(chatUserName)) {
-            return alert("ایدی گروه معتبر نیست (باید @groupname یا -100xxxx باشد)");
-        }
 
         setLoading(true);
 
         try {
-            const res = await fetch("/api/send-message", {
+            const res = await fetch("/api/botTG/sendMessage", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
